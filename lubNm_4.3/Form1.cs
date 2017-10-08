@@ -24,12 +24,16 @@ namespace lubNm_4._3
             
             try
             { DT.Close();
-                Data.table.Dispose();
-               // Data.column.Dispose();
-               // Data.row.di
+                Data.table.Rows.Clear();
+                Data.table.Columns.Clear();
+                Data.dataSet.Tables.Clear();
+                Data.dataSet.Clear();
+              
+                // Data.column.Dispose();
+                // Data.row.di
             }
-           
-            catch(System.NullReferenceException) { }
+
+            catch (System.NullReferenceException) { }
             finally { 
             OpenFileDialog ofd = new OpenFileDialog();
 
@@ -94,10 +98,12 @@ namespace lubNm_4._3
             {
                 richTextBox1.Text += str + '\n';
             }
-
-          /*  foreach(int i in IN.position)
-                richTextBox1.Text += i.ToString() + '\n';
-           */
+          
+                richTextBox1.Text += Data.VT ;
+            
+            /*  foreach(int i in IN.position)
+                  richTextBox1.Text += i.ToString() + '\n';
+             */
         }
     }
     
