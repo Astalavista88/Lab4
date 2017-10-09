@@ -21,10 +21,10 @@ namespace lubNm_4._3
         {
             InitializeComponent();
             buildTable();
-            Thread myThread = new Thread(func);
-            this.Width = dataGridView1.ColumnCount * 70 + 8;
-            this.Height = dataGridView1.RowCount * 25 + 67;
-            this.Width = maxl() + 20;
+           // Thread myThread = new Thread(func);
+            //this.Width = dataGridView1.ColumnCount * 70 + 8;
+           // this.Height = dataGridView1.RowCount * 25 + 67;
+           // this.Width = maxl() + 20;
             Thread.Sleep(100); ;
         }
 
@@ -44,10 +44,14 @@ namespace lubNm_4._3
                  count++;
              }
 
-
+            
 
                  dataGridView1.Rows.Add(count);*/
 
+            textBox1.Text = Data.VN;
+            textBox2.Text = Data.VT_IN;
+            textBox3.Text = Data.VT_OUT;
+            textBox4.Text = Data.startsimpbol;
             dataGridView1.DataSource = Data.table;
             
             
@@ -66,13 +70,15 @@ namespace lubNm_4._3
         {
            // this.Width = dataGridView1.ColumnCount * dataGridView1.ColumnHeaders + 8;
             //this.Width = dataGridView1.RowHeadersWidth
-            this.Height = dataGridView1.RowCount * dataGridView1.ColumnHeadersHeight + dataGridView1.ColumnHeadersHeight *5;
+           // this.Height = dataGridView1.RowCount * dataGridView1.ColumnHeadersHeight + dataGridView1.ColumnHeadersHeight *5;
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            this.Width = maxl()+20;
+        {/*  int a = e.ColumnIndex;
+            int b = e.RowIndex;
+            if (a==0) (dataGridView1.Columns[a].[e])
+           // e.ColumnIndex.
+          //  this.Width = maxl()+20;*/
         }
         void func()
         {
@@ -85,13 +91,53 @@ namespace lubNm_4._3
             B = new string[dataGridView1.Rows.Count - 1];
             C = new string[dataGridView1.Rows.Count - 1];
             int i = 0;
-          
+                Data.VN= textBox1.Text ;
+                Data.VT_IN = textBox2.Text ;
+                Data.VT_OUT= textBox3.Text;
+                Data.startsimpbol= textBox4.Text;
 
             for (i=0; i< dataGridView1.Rows.Count - 1;i++)
             {
                 C[i] = dataGridView1.Rows[i].Cells[2].Value.ToString().Trim();
                 B[i] = dataGridView1.Rows[i].Cells[1].Value.ToString().Trim();
                 A[i] = dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
+            }
+        }
+
+        private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+          //  if (dataGridView1.col)
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+           
+            if (textBox1.Text.Contains(ch))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "Символы нетерминального алфавита не должны повторяться";
+                
+            }
+
+            else if(((ch > 0 && ch < 65) || (ch > 91))&&(ch !=0|| ch != 127))
+            {
+                
+                e.Handled = true;
+                richTextBox1.Text = "Для нетерминального алфавита используются только Заглавные латинские Буквы";
+            }
+
+
+            else
+            {
+                e.Handled = true;
+                if (textBox1.Text.Length>0&& textBox1.Text.Substring(textBox1.Text.Length-1) != ",")
+                {
+                    textBox1.Text += "," + ch;
+                }
+                else textBox1.Text += ch;
+                richTextBox1.Text = "";
             }
         }
 

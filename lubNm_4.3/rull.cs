@@ -15,7 +15,7 @@ namespace lubNm_4._3
         string[] OUT;
 
         public int[] position;
-        public string startsimpbol = "S";
+        public string startsimpbol = Data.startsimpbol;
         int count = 0;
 
         public bool check = true; //не содержит

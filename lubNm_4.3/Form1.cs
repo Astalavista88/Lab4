@@ -99,8 +99,8 @@ namespace lubNm_4._3
                 richTextBox1.Text += str + '\n';
             }
           
-                richTextBox1.Text += Data.VT ;
-            
+                richTextBox1.Text += Data.VT_IN ;
+                richTextBox1.Text += Data.VT_OUT;
             /*  foreach(int i in IN.position)
                   richTextBox1.Text += i.ToString() + '\n';
              */

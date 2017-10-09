@@ -14,10 +14,10 @@ namespace lubNm_4._3
         public static List<string> lang = new List<string>();
         public static NameValueCollection rulleIN = new NameValueCollection();
         public static NameValueCollection rulleOut = new NameValueCollection();
-        public static string path = "",VN="", VT="";
+        public static string path = "",VN="", VT_OUT = "", VT_IN = "";
         public static System.Data.DataSet dataSet;
         public static System.Data.DataTable table = new System.Data.DataTable("Rulles");
-
+        public static string startsimpbol = "";
         public static string[] A;
         public static string[] B;
 
@@ -84,8 +84,10 @@ namespace lubNm_4._3
 
             foreach (string str in lang)
             {
-                if (str.StartsWith("VN")) VN = str.Substring(str.IndexOf("=") + 1);
-                if (str.StartsWith("VT")) VT = str.Substring(str.IndexOf("=") + 1);
+                if (str.StartsWith("_VN")) VN = str.Substring(str.IndexOf("=") + 1);
+                if (str.StartsWith("_VT_IN")) VT_IN = str.Substring(str.IndexOf("=") + 1);
+                if (str.StartsWith("_VT_OUT")) VT_OUT = str.Substring(str.IndexOf("=") + 1);
+                if (str.StartsWith("_STARTsIMBOL")) startsimpbol = str.Substring(str.IndexOf("=") + 1);
                 if (str.Length>1&&VN.Contains(str.Remove(1)))
                 {
                     row = table.NewRow();
