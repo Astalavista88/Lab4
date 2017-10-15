@@ -128,6 +128,7 @@ namespace lubNm_4._3
         public void build(List<int> listRull, string s, int[] position)
         {
             int j = 0;
+
             foreach (int i in listRull)
             {
                 int X = 0;

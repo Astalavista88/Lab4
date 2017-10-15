@@ -79,28 +79,36 @@ namespace lubNm_4._3
             {
                 richTextBox1.Text += str.Remove(str.IndexOf("#")) + '\n';
             }
-            IN.build(IN.listRull,"S",IN.position);
-            OUT.build(IN.listRull, "S", IN.position);
-            
+
+
+            try
+            {
+                IN.build(IN.listRull, "S", IN.position);
+                OUT.build(IN.listRull, "S", IN.position);
+
+                richTextBox1.Text += "Строим входную цепочцу:\n\n";
+                foreach (string str in IN.buildResult)
+                {
+                    richTextBox1.Text += str + '\n';
+                }
+                richTextBox1.Text += "Строим выходную цепочцу:\n\n";
+                foreach (string str in OUT.buildResult)
+                {
+                    richTextBox1.Text += str + '\n';
+                }
+
+                richTextBox1.Text += Data.VT_IN;
+                richTextBox1.Text += Data.VT_OUT;
+
+            }
+            catch (Exception) { richTextBox1.Text = "Не удалось разобрать цепочку";}
 /*
             foreach (int str in IN.listRull)
             {
                 richTextBox1.Text += str.ToString() + '\n';
             }*/
 
-            richTextBox1.Text += "Строим входную цепочцу:\n\n";
-            foreach (string  str in IN.buildResult)
-            {
-                richTextBox1.Text += str + '\n';
-            }
-            richTextBox1.Text += "Строим выходную цепочцу:\n\n";
-            foreach (string str in OUT.buildResult)
-            {
-                richTextBox1.Text += str + '\n';
-            }
-          
-                richTextBox1.Text += Data.VT_IN ;
-                richTextBox1.Text += Data.VT_OUT;
+           
             /*  foreach(int i in IN.position)
                   richTextBox1.Text += i.ToString() + '\n';
              */

@@ -113,8 +113,9 @@ namespace lubNm_4._3
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-           
-            if (textBox1.Text.Contains(ch))
+
+            if ((ch == 8 || ch == 127)) { }
+            else if (textBox1.Text.Contains(ch))
             {
                 e.Handled = true;
                 richTextBox1.Text = "Символы нетерминального алфавита не должны повторяться";
@@ -141,6 +142,69 @@ namespace lubNm_4._3
             }
         }
 
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if ((ch == 8 || ch == 127)) { }
+            else if (textBox2.Text.Contains(ch))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "Символы алфавита не должны повторяться";
+
+            }
+
+            else if ((ch >= 65 && ch <= 91) && (ch != 0 || ch != 127))
+            {
+
+                e.Handled = true;
+                richTextBox1.Text = "Заглавные латинские буквы используются только для нетерминального алфавита";
+            }
+
+
+            else
+            {
+                e.Handled = true;
+                if (textBox2.Text.Length > 0 && textBox2.Text.Substring(textBox2.Text.Length - 1) != ",")
+                {
+                    textBox2.Text += "," + ch;
+                }
+                else textBox2.Text += ch;
+                richTextBox1.Text = "";
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if ((ch == 8 || ch == 127)) { }
+            else if (textBox3.Text.Contains(ch))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "Символы алфавита не должны повторяться";
+
+            }
+
+            else if ((ch >= 65 && ch <= 91) && (ch != 0 || ch != 127))
+            {
+
+                e.Handled = true;
+                richTextBox1.Text = "Заглавные латинские буквы используются только для нетерминального алфавита";
+            }
+
+
+            else
+            {
+                e.Handled = true;
+                if (textBox3.Text.Length > 0 && textBox3.Text.Substring(textBox3.Text.Length - 1) != ",")
+                {
+                    textBox3.Text += "," + ch;
+                }
+                else textBox3.Text += ch;
+                richTextBox1.Text = "";
+            }
+        }
     }
     }
 
