@@ -65,7 +65,11 @@ namespace lubNm_4._3
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            if (Data.Good == false) { richTextBox1.Text = "Прежде чем приступить к работе проверте корректность заданных правил"; }
+            else { 
             Rull IN = new Rull();
+
             Rull OUT = new Rull();
             IN.setVn(alf);
             OUT.setVn(alf);
@@ -122,6 +126,7 @@ namespace lubNm_4._3
             /*  foreach(int i in IN.position)
                   richTextBox1.Text += i.ToString() + '\n';
              */
+        }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

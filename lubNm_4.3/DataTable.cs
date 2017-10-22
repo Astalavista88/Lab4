@@ -14,6 +14,7 @@ namespace lubNm_4._3
     {
         public static int count=0;
         public  string [] A;
+        
         public  string[] B;
         public string[] C;
         public DataTable()
@@ -107,7 +108,25 @@ namespace lubNm_4._3
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-          //  if (dataGridView1.col)
+
+            if (dataGridView1.CurrentCell.ColumnIndex == 0 && !textBox1.Text.Contains(ch)&&!(ch == 8 || ch == 127))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "В левой части правила могут находиться только символы принадлежащие нетерминальному алфавиту";
+            }
+            if (dataGridView1.CurrentCell.ColumnIndex == 1 && !textBox2.Text.Contains(ch) && !textBox1.Text.Contains(ch) && !(ch == 8 || ch == 127))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "В правой части правила могут находиться только символы принадлежащие нетерминальному или входному терминальному алфавиту";
+            }
+            if (dataGridView1.CurrentCell.ColumnIndex == 2 && !textBox3.Text.Contains(ch) && !textBox1.Text.Contains(ch) && !(ch == 8 || ch == 127))
+            {
+                e.Handled = true;
+                richTextBox1.Text = "В правой части правила могут находиться только символы принадлежащие нетерминальному или выходному терминальному алфавиту";
+            }
+
+
+            //  if (dataGridView1.col)
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -213,7 +232,8 @@ namespace lubNm_4._3
             int i = A.Count<string>();
             int In = 0;
             int Out = 0;
-            for (int j =0; j < i-1 ; j++)
+            bool Chek = true;
+            for (int j =0; j < i ; j++)
             {
                 for (int K = 0; K <= B[j].Length-1 ; K++)
                 {
@@ -226,14 +246,18 @@ namespace lubNm_4._3
                     char ch = C[j][K];
                     if (Data.VN.Contains(ch)) Out++;
                 }
-
+                if (In != Out) { Chek = false; break; }
+                
             }
             richTextBox1.Text = In.ToString();
             richTextBox1.Text += Out.ToString();
-            if (In != Out) {
+            if (Chek == false)
+            {
+                Data.Good = false;
                 this.Show();
-                richTextBox1.Text += "Количество нетерминальных символов во входящем и исходящем алфавитах отлиаюся, проверьте корректность введенных правил";
+                richTextBox1.Text += "Количество нетерминальных символов во входящем и исходящем алфавитах отличаюся, проверьте корректность введенных правил";
             }
+            else { Data.Good = true; }
 
         }
 
@@ -261,7 +285,7 @@ namespace lubNm_4._3
         {
 
 
-
+            dataGridView1.EndEdit();
 
 
             A = new string[dataGridView1.Rows.Count - 1];
@@ -280,6 +304,25 @@ namespace lubNm_4._3
                 A[i] = dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
             }
             checkRull();
+        }
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridViewTextBoxEditingControl textBoxEditingControl = e.Control as DataGridViewTextBoxEditingControl;
+            if (textBoxEditingControl != null)
+            {
+                textBoxEditingControl.KeyPress -= dataGridView1_KeyPress;
+               // textBoxEditingControl.KeyPress -= textBoxEditingControl_KeyPress_digits;
+              //  if (((DataGridView)sender).CurrentCell.ColumnIndex == 0)
+                    textBoxEditingControl.KeyPress += dataGridView1_KeyPress;
+             //   else
+               //     textBoxEditingControl.KeyPress += textBoxEditingControl_KeyPress_digits;
+            }
         }
     }
     }

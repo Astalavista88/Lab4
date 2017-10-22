@@ -11,6 +11,7 @@ namespace lubNm_4._3
 {
     public static class Data
     {
+        public static bool Good = true;
         public static List<string> lang = new List<string>();
         public static NameValueCollection rulleIN = new NameValueCollection();
         public static NameValueCollection rulleOut = new NameValueCollection();
