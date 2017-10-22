@@ -205,6 +205,82 @@ namespace lubNm_4._3
                 richTextBox1.Text = "";
             }
         }
+
+
+        private void checkRull()
+        {
+
+            int i = A.Count<string>();
+            int In = 0;
+            int Out = 0;
+            for (int j =0; j < i-1 ; j++)
+            {
+                for (int K = 0; K <= B[j].Length-1 ; K++)
+                {
+                    char ch = B[j][K];
+                    if (Data.VN.Contains(ch)) In++;
+                   
+                }
+                for (int K = 0; K <= C[j].Length-1; K++)
+                {
+                    char ch = C[j][K];
+                    if (Data.VN.Contains(ch)) Out++;
+                }
+
+            }
+            richTextBox1.Text = In.ToString();
+            richTextBox1.Text += Out.ToString();
+            if (In != Out) {
+                this.Show();
+                richTextBox1.Text += "Количество нетерминальных символов во входящем и исходящем алфавитах отлиаюся, проверьте корректность введенных правил";
+            }
+
+        }
+
+
+        private void DataTable_Leave(object sender, EventArgs e)
+        {
+            A = new string[dataGridView1.Rows.Count - 1];
+            B = new string[dataGridView1.Rows.Count - 1];
+            C = new string[dataGridView1.Rows.Count - 1];
+            int i = 0;
+            Data.VN = textBox1.Text;
+            Data.VT_IN = textBox2.Text;
+            Data.VT_OUT = textBox3.Text;
+            Data.startsimpbol = textBox4.Text;
+
+            for (i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                C[i] = dataGridView1.Rows[i].Cells[2].Value.ToString().Trim();
+                B[i] = dataGridView1.Rows[i].Cells[1].Value.ToString().Trim();
+                A[i] = dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
+            }
+        }
+
+        private void DataTable_Deactivate(object sender, EventArgs e)
+        {
+
+
+
+
+
+            A = new string[dataGridView1.Rows.Count - 1];
+            B = new string[dataGridView1.Rows.Count - 1];
+            C = new string[dataGridView1.Rows.Count - 1];
+            int i = 0;
+            Data.VN = textBox1.Text;
+            Data.VT_IN = textBox2.Text;
+            Data.VT_OUT = textBox3.Text;
+            Data.startsimpbol = textBox4.Text;
+
+            for (i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                C[i] = dataGridView1.Rows[i].Cells[2].Value.ToString().Trim();
+                B[i] = dataGridView1.Rows[i].Cells[1].Value.ToString().Trim();
+                A[i] = dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
+            }
+            checkRull();
+        }
     }
     }
 

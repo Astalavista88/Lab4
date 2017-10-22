@@ -76,6 +76,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
@@ -153,7 +154,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(177, 180);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(144, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(144, 140);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
@@ -175,6 +176,8 @@
             this.Name = "DataTable";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DataTable";
+            this.Deactivate += new System.EventHandler(this.DataTable_Deactivate);
+            this.Leave += new System.EventHandler(this.DataTable_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -71,7 +71,11 @@ namespace lubNm_4._3
             OUT.setVn(alf);
             IN.ListRull(DT.A, DT.B);
             OUT.ListRull(DT.A, DT.C);
-            IN.parseIt(textBox1.Text);
+            try
+            {
+                IN.parseIt(textBox1.Text);
+            }
+            catch (Exception) { IN.result.Clear();}
 
             richTextBox1.Text = "Разбираем цепочку:\n\n";
             IN.result.Reverse();
@@ -80,11 +84,18 @@ namespace lubNm_4._3
                 richTextBox1.Text += str.Remove(str.IndexOf("#")) + '\n';
             }
 
-
             try
             {
                 IN.build(IN.listRull, "S", IN.position);
+            }
+            catch (Exception) { IN.result.Clear(); }
+            try
+            {
                 OUT.build(IN.listRull, "S", IN.position);
+            }
+            catch (Exception) { IN.result.Clear(); }
+
+         
 
                 richTextBox1.Text += "Строим входную цепочцу:\n\n";
                 foreach (string str in IN.buildResult)
@@ -97,21 +108,39 @@ namespace lubNm_4._3
                     richTextBox1.Text += str + '\n';
                 }
 
-                richTextBox1.Text += Data.VT_IN;
-                richTextBox1.Text += Data.VT_OUT;
+            //    richTextBox1.Text += Data.VT_IN;
+            //    richTextBox1.Text += Data.VT_OUT;
+            if (IN.result.Count < 2) richTextBox1.Text = "Не удалось разобрать цепочку\nпроверьте входные данные";
+            if (textBox1.Text.Length<1) richTextBox1.Text = "Не задана цепочкадля перевода";
+            /*
+                        foreach (int str in IN.listRull)
+                        {
+                            richTextBox1.Text += str.ToString() + '\n';
+                        }*/
 
-            }
-            catch (Exception) { richTextBox1.Text = "Не удалось разобрать цепочку";}
-/*
-            foreach (int str in IN.listRull)
-            {
-                richTextBox1.Text += str.ToString() + '\n';
-            }*/
 
-           
             /*  foreach(int i in IN.position)
                   richTextBox1.Text += i.ToString() + '\n';
              */
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if ((ch == 8 || ch == 127)) { }
+
+            else if (Data.VT_IN.Count() < 1)
+            {
+                e.Handled = true;
+                richTextBox1.Text = "Не обходимо задать правила!";
+            }
+            else if (!Data.VT_IN.Contains(ch))
+            {
+
+                e.Handled = true;
+                richTextBox1.Text = "Вводимый символ не принадлежит входному алфавиту!";
+            }
+                      
         }
     }
     
